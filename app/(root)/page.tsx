@@ -96,7 +96,7 @@ export default function IndexPage() {
           </AnimatedText>
           <div className="mt-4 max-w-[42rem] text-center">
             <p className="leading-normal text-muted-foreground text-sm sm:text-base">
-              I’m a full-stack developer specializing in modern web apps with React, TypeScript, and scalable backends. I deliver robust, maintainable solutions from UI to cloud.
+              I’m a full-stack developer specializing in modern web apps with React, TypeScript, and scalable backends.
             </p>
           </div>
 
