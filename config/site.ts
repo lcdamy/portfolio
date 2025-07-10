@@ -4,12 +4,12 @@ export const siteConfig = {
   username: "lcdamy",
   description:
     "lcdamy's portfolio - A modern, responsive Next.js portfolio for developers. This open-source template can be customized to showcase your own skills, projects, and professional experience.",
-  url: "https://nbarkiya.xyz",
+  url: "https://lcdamy.netlify.app",
   links: {
     twitter: "https://x.com/lcdamy",
     github: "https://github.com/lcdamy",
   },
-  ogImage: "https://nbarkiya.xyz/peter-img.jpg",
+  ogImage: "https://lcdamy.netlify.app/peter-img.jpg",
   iconIco:
     "https://res.cloudinary.com/dbfvcn3f6/image/upload/v1692357384/assets/naman-favicon.ico",
   logoIcon:
