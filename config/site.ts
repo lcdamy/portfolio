@@ -3,7 +3,7 @@ export const siteConfig = {
   authorName: "lcdamy",
   username: "lcdamy",
   description:
-    "lcdamy's portfolio - A modern, responsive Next.js portfolio for developers. This open-source template can be customized to showcase your own skills, projects, and professional experience.",
+    "lcdamy's portfolio - A software engineer with 10 years of experience in web development, specializing in building scalable and efficient applications. Passionate about coding, problem-solving, and continuous learning.",
   url: "https://lcdamy.netlify.app",
   links: {
     twitter: "https://x.com/lcdamy",
