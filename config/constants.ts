@@ -68,6 +68,8 @@ export type ValidSkills =
   | "Kubernetes"
   | "Docker"
   | "Rabbit MQ"
+  | "Javafx"
+  | "Kotlin"
   | "PHP";
 
 export type ValidCategory =
@@ -77,7 +79,7 @@ export type ValidCategory =
   | "UI/UX"
   | "Web Dev"
   | "Mobile Dev"
-  | "3D Modeling";
+  | "Desktop Dev";
 
 export type ValidExpType = "Personal Project" | "Professional";
 
