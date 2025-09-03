@@ -394,6 +394,83 @@ export const Experiences: ExperienceInterface[] = [
       ],
     },
   },
+  {
+    id: "isco",
+    companyName: "ISCO",
+    type: "Personal Project",
+    category: ["Web Dev", "UI/UX"],
+    shortDescription:
+      "A platform for job seekers to find and apply for jobs that match their skills and interests.",
+    websiteLink: "https://frontend-job-board-system.netlify.app",
+    githubLink: "https://github.com/lcdamy/frontend_Job_Board_System",
+    techStack: ["React", "Tailwind CSS", "Typescript"],
+    startDate: new Date("2025-08-01"),
+    endDate: new Date("2025-08-15"),
+    companyLogoImg: "/experience/isco/logo.png",
+    pagesInfoArr: [
+      {
+        title: "isco Job Board",
+        description: "A platform for job seekers to find and apply for jobs that match their skills and interests.",
+        imgArr: [
+          "/experience/isco/app_1.png",
+          "/experience/isco/app_2.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "The isco Job Board project is a web application designed to help job seekers find and apply for jobs that match their skills and interests. I developed this project using React, Tailwind CSS, and Typescript."
+      ],
+      bullets: [
+        "Developed a web application to help job seekers find and apply for jobs that match their skills and interests.",
+        "Implemented responsive design using React, Tailwind CSS, and Typescript.",
+        "Ensured seamless user experience with intuitive navigation and clear calls to action.",
+        "Focused on providing detailed job listings and application processes.",
+        "Utilized Tailwind CSS for rapid styling and consistent design language.",
+        "Designed multiple pages to enhance user engagement and understanding.",
+        "Collaborated with the team to deliver a high-quality product.",
+      ],
+    },
+  },
+  {
+    id: "innovate",
+    companyName: "TechClick",
+    type: "Professional",
+    category: ["Frontend", "UI/UX"],
+    shortDescription:
+      "Connect with local and international investors ready to fund Rwanda's most promising innovations",
+    websiteLink: "https://innovate.uat2.techclick.rw/en",
+    techStack: ["React", "Tailwind CSS", "Typescript"],
+    startDate: new Date("2025-01-01"),
+    endDate: new Date("2025-09-01"),
+    companyLogoImg: "/experience/innovate/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Innovate Platform",
+        description: "Screenshots showcasing the Innovate platform's web interface.",
+        imgArr: [
+          "/experience/innovate/app_1.png",
+          "/experience/innovate/app_2.png",
+          "/experience/innovate/app_3.png",
+          "/experience/innovate/app_4.png",
+          "/experience/innovate/app_5.png",
+        ],
+      }
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Innovate is a platform that connects local and international investors with Rwanda's most promising innovations. It aims to facilitate funding opportunities and support the growth of innovative projects in the region.",
+        "Innovate provides a comprehensive ecosystem for startups and entrepreneurs to showcase their ideas, connect with potential investors, and access resources to help them succeed."
+      ],
+      bullets: [
+        "Connected local and international investors with promising Rwandan innovations.",
+        "Facilitated funding opportunities for startups and entrepreneurs.",
+        "Showcased innovative projects through a user-friendly platform.",
+        "Provided resources and support for project growth and development.",
+      ],
+    },
+  },
+
 ];
 
 export const featuredExperiences = Experiences.slice(0, 3);
