@@ -1,70 +1,51 @@
-# Portfolio Website Navigation Overview
+# Portfolio Website Overview
 
-This document outlines the navigation structure of the portfolio website [https://nbarkiya.xyz/](https://nbarkiya.xyz/), detailing each page and its primary sections to facilitate understanding and interaction.
+Live site: [https://lcdamy.netlify.app](https://lcdamy.netlify.app)
 
----
+## Main navigation
 
-## Main Navigation Menu
+Defined in `config/routes.ts`:
 
-The website's main navigation menu is accessible from all pages and includes the following links:
+1. **Skills** — `/skills`
+2. **Experience** — `/experience`
+3. **Career** — `/career`
+4. **Contact** — `/contact`
 
-1. **Home**: [https://nbarkiya.xyz/](https://nbarkiya.xyz/)
-2. **Skills**: [https://nbarkiya.xyz/skills](https://nbarkiya.xyz/skills)
-3. **Experience**: [https://nbarkiya.xyz/experience](https://nbarkiya.xyz/experience)
-4. **Contributions**: [https://nbarkiya.xyz/contributions](https://nbarkiya.xyz/contributions)
-5. **Contact**: [https://nbarkiya.xyz/contact](https://nbarkiya.xyz/contact)
+The logo/name in the header links back to the home page (`/`).
 
----
+## Pages
 
-## Detailed Page Structure
+### Home — `/`
 
-### 1. Home
+- **Introduction**: photo, full name, role ("Full Stack Developer"), short bio, GitHub and Contact buttons.
+- **Skills preview**: the first 6 skills from `config/skills.ts`, with a link to all skills.
+- **Experience preview**: the first 3 projects from `config/experience.ts`, with a link to all experience.
 
-**URL:** [https://nbarkiya.xyz/](https://nbarkiya.xyz/)
+### Skills — `/skills`
 
-**Sections:**
+All skills from `config/skills.ts`, each with an icon, short description and rating.
 
-- **Introduction**: Presents the individual's name and role (e.g., "Full Stack Developer").
-- **Skills Overview**: Highlights key skills with a prompt to view all skills.
-- **Experience Highlights**: Summarizes notable projects with links to detailed descriptions.
-- **Contributions Summary**: Lists recent open-source contributions with links for more information.
+### Experience — `/experience` and `/experience/[expId]`
 
-### 2. Skills
+Project cards (company, category, tech stack, dates). Each card opens a detail page with paragraphs, bullet points and screenshot galleries (`pagesInfoArr`). Images live in `public/experience/<id>/`.
 
-**URL:** [https://nbarkiya.xyz/skills](https://nbarkiya.xyz/skills)
+### Career — `/career` and `/career/[careerId]`
 
-**Sections:**
+Timeline of positions from `config/career.ts`, with a detail page per role. Logos live in `public/career/`.
 
-- **Technical Skills**: Enumerates various technologies and tools, each accompanied by a brief description.
+### Contact — `/contact`
 
-### 3. Experience
+- **Contact form**: name, email, message and an optional social link. Submissions go to `app/api/contact/route.ts`, which forwards them to a Google Form (configured through the `GOOGLE_FORM_*` env vars).
+- **Contact card**: email, phone and GitHub link.
 
-**URL:** [https://nbarkiya.xyz/experience](https://nbarkiya.xyz/experience)
+### Resume — `/resume`
 
-**Sections:**
+Redirects to `NEXT_PUBLIC_RESUME_LINK`.
 
-- **Professional Projects**: Details projects with descriptions, roles, and links to read more.
+## Additional features
 
-### 4. Contributions
-
-**URL:** [https://nbarkiya.xyz/contributions](https://nbarkiya.xyz/contributions)
-
-**Sections:**
-
-- **Open-Source Contributions**: Lists contributions with descriptions and links to the respective repositories.
-
-### 5. Contact
-
-**URL:** [https://nbarkiya.xyz/contact](https://nbarkiya.xyz/contact)
-
-**Sections:**
-
-- **Contact Form**: Fields for name, email, message, and optional social links.
-- **GitHub Link**: Provides a link to the source code of the website's template.
-
----
-
-## Additional Features
-
-- **Theme Toggle**: Allows users to switch between light and dark themes.
-- **Responsive Design**: Ensures optimal viewing across various devices.
+- **Themes**: light, dark and several extra color themes (`next-themes`).
+- **Animations**: page and section transitions with `framer-motion`.
+- **SEO**: per-page metadata, Person structured data, `sitemap.ts`, `manifest.ts`, `robots.txt`.
+- **Analytics**: Google Analytics (`NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID`) and Vercel Analytics.
+- **Responsive design**: separate desktop and mobile navigation.

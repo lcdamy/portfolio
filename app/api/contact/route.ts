@@ -18,9 +18,17 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, message, social, email } = body;
 
-    const res = await fetch(
-      `${formLink}/formResponse?${fieldIdName}=${name}&${fieldIdEmail}=${email}&${fieldIdMessage}=${message}&${fieldIdSocial}=${social}`
-    );
+    const params = new URLSearchParams({
+      [fieldIdName ?? ""]: name ?? "",
+      [fieldIdEmail ?? ""]: email ?? "",
+      [fieldIdMessage ?? ""]: message ?? "",
+      [fieldIdSocial ?? ""]: social ?? "",
+    });
+
+    const res = await fetch(`${formLink}/formResponse?${params.toString()}`);
+    if (!res.ok) {
+      return new NextResponse("Failed to submit form", { status: 502 });
+    }
 
     return NextResponse.json("Success!");
   } catch (error) {

@@ -18,8 +18,10 @@ import { cn } from "@/lib/utils";
 import peterImg from "@/public/peter-img.jpg";
 
 export const metadata: Metadata = {
-  title: `${pagesConfig.home.metadata.title} | Modern Next.js Developer Portfolio Template`,
-  description: `${pagesConfig.home.metadata.description} This open-source Next.js portfolio template is customizable to showcase your skills and projects.`,
+  title: {
+    absolute: "Pierre Damien Murindangabo Cyuzuzo | Full Stack Developer",
+  },
+  description: siteConfig.description,
   alternates: {
     canonical: siteConfig.url,
   },
@@ -30,31 +32,14 @@ export default function IndexPage() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: siteConfig.authorName,
+    name: "Pierre Damien Murindangabo Cyuzuzo",
+    alternateName: siteConfig.authorName,
     url: siteConfig.url,
     image: siteConfig.ogImage,
     jobTitle: "Full Stack Developer",
     sameAs: [siteConfig.links.github, siteConfig.links.twitter],
   };
 
-  // Structured data for website as a software application (template)
-  const softwareSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Next.js Portfolio Template",
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "Web",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    author: {
-      "@type": "Person",
-      name: siteConfig.authorName,
-      url: siteConfig.url,
-    },
-  };
 
   return (
     <ClientPageWrapper>
@@ -62,11 +47,6 @@ export default function IndexPage() {
         id="schema-person"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
-      <Script
-        id="schema-software"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
       <section className="space-y-6 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
