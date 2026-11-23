@@ -1,7 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+
+import { cn } from "@/lib/utils";
 
 interface AnimatedTextProps {
   children: ReactNode;
@@ -10,37 +9,18 @@ interface AnimatedTextProps {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 }
 
-const textVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-  },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
-};
-
+// CSS-only fade-in: renders on the server and animates on first paint,
+// without waiting for JavaScript.
 export const AnimatedText = ({
   children,
   delay = 0,
   className = "",
-  as = "div",
+  as: Component = "div",
 }: AnimatedTextProps) => {
-  const Component = motion[as];
-
   return (
     <Component
-      initial="hidden"
-      animate="visible"
-      custom={delay}
-      variants={textVariants}
-      className={className}
+      className={cn("motion-safe:animate-fade-up", className)}
+      style={delay ? { animationDelay: `${delay}s` } : undefined}
     >
       {children}
     </Component>

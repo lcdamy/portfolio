@@ -55,21 +55,21 @@ export default function IndexPage() {
             src={peterImg}
             height={100}
             width={100}
-            sizes="100vw"
+            sizes="(min-width: 640px) 256px, 60vw"
             className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border-8 border-primary"
             alt="lcdamy - Full Stack Developer Portfolio"
             priority
           />
           <AnimatedText
             as="h1"
-            delay={0.2}
+            delay={0}
             className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
           >
             Pierre Damien Murindangabo Cyuzuzo
           </AnimatedText>
           <AnimatedText
             as="h3"
-            delay={0.4}
+            delay={0.1}
             className="font-heading text-base sm:text-xl md:text-xl lg:text-2xl"
           >
             Full Stack Developer
@@ -81,7 +81,7 @@ export default function IndexPage() {
           </div>
 
           <div className="flex flex-col mt-10 items-center justify-center sm:flex-row sm:space-x-4 gap-3">
-            <AnimatedText delay={0.6}>
+            <AnimatedText delay={0.2}>
               <Link
                 href={"https://github.com/lcdamy"}
                 target="_blank"
@@ -91,7 +91,7 @@ export default function IndexPage() {
                 <Icons.gitHub className="w-4 h-4 mr-2" /> GitHub
               </Link>
             </AnimatedText>
-            <AnimatedText delay={0.8}>
+            <AnimatedText delay={0.3}>
               <Link
                 href={"/contact"}
                 rel="noreferrer"
@@ -107,7 +107,7 @@ export default function IndexPage() {
               </Link>
             </AnimatedText>
           </div>
-          <AnimatedText delay={1.2}>
+          <AnimatedText delay={0.5}>
             <Icons.chevronDown className="h-6 w-6 mt-10" />
           </AnimatedText>
         </div>

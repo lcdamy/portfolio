@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d2b33"/>
+      <stop offset="1" stop-color="#3f6f7f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1180" cy="90" r="220" fill="#ffffff" fill-opacity="0.05"/>
+  <circle cx="1240" cy="680" r="160" fill="#ffffff" fill-opacity="0.04"/>
+  <rect x="120" y="210" width="300" height="300" rx="48" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2"/>
+  <g transform="translate(170 260)" fill="none" stroke="#ffffff" stroke-opacity="0.92" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="72" cy="70" r="24"/><path d="M28 160c4-34 22-52 44-52s40 18 44 52"/><circle cx="138" cy="78" r="20"/><path d="M122 112c6-4 10-5 16-5 20 0 34 16 38 46"/>
+  </g>
+  <text x="500" y="270" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" letter-spacing="4" fill="#ffffff" fill-opacity="0.6">PERSONAL PROJECT</text>
+  <text x="500" y="360" font-family="Inter, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#ffffff">Alight HR</text>
+  <text x="500" y="425" font-family="Inter, Helvetica, Arial, sans-serif" font-size="34" fill="#ffffff" fill-opacity="0.85">Alight</text>
+  <text x="500" y="485" font-family="Inter, Helvetica, Arial, sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.6">Next.js · Node.js · MySQL</text>
+</svg>

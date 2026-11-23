@@ -6,6 +6,11 @@ interface PagesInfoInterface {
   description?: string;
 }
 
+interface ExternalLinkInterface {
+  label: string;
+  url: string;
+}
+
 interface DescriptionDetailsInterface {
   paragraphs: string[];
   bullets: string[];
@@ -19,6 +24,7 @@ export interface ExperienceInterface {
   shortDescription: string;
   websiteLink?: string;
   githubLink?: string;
+  links?: ExternalLinkInterface[];
   techStack: ValidSkills[];
   startDate: Date;
   endDate: Date;
@@ -29,26 +35,90 @@ export interface ExperienceInterface {
 
 export const Experiences: ExperienceInterface[] = [
   {
+    id: "sdid",
+    companyName: "QT Global Software Ltd",
+    type: "Professional",
+    category: ["Full Stack", "Backend", "Web Dev"],
+    shortDescription:
+      "National digital identity platform for Rwanda: ABIS biometric services and portals for agents and service providers.",
+    techStack: ["Java", "Spring Boot", "React", "Next.js", "Typescript", "ABIS", "Biometrics", "Kafka", "PostgreSQL", "Docker", "SonarQube", "CI/CD"],
+    startDate: new Date("2025-09-01"),
+    endDate: new Date(),
+    companyLogoImg: "/experience/sdid/cover.svg",
+    links: [
+      {
+        label: "SDID Consent Portal (UAT)",
+        url: "https://uat-consent-portal.sdid.nida.gov.rw/login",
+      },
+      {
+        label: "SDID Parent Portal (UAT)",
+        url: "https://uat-parent-portal.sdid.nida.gov.rw/login",
+      },
+    ],
+    pagesInfoArr: [
+      {
+        title: "SDID Consent Portal",
+        description:
+          "A service portal where organizations manage consent agreements, track user-assisted consent from request to expiry, subscribe to notifications and run assisted eKYC identity verification.",
+        imgArr: [
+          "/experience/sdid/consent_home.webp",
+          "/experience/sdid/consent_agreements.webp",
+          "/experience/sdid/consent_agreement_detail.webp",
+          "/experience/sdid/assisted_consent.webp",
+        ],
+      },
+      {
+        title: "SDID Identity & Consent Management",
+        description:
+          "Operational portals for searching and managing digital identities by SDIN or application ID, handling requests, and administering data policies and consent. Personal data in these screenshots has been blurred.",
+        imgArr: [
+          "/experience/sdid/sdid_portals_home.webp",
+          "/experience/sdid/sdin_search.webp",
+          "/experience/sdid/sdid_record.webp",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Rwanda's Smart Digital ID (SDID) project provides digital identity services for citizens and residents. At QT Global Software Ltd, I lead a team of 4 developers implementing the SDID applications, coordinating technical development, API integrations and application delivery.",
+        "On the frontend, the work spans React / Next.js portals, including the Agent Portal, the Service Provider Portal, the Consent Portal and the Parent Portal. On the backend, it covers Java / Spring Boot middleware and the ABIS (Automated Biometric Identification System) services that process citizens' biometrics during enrollment.",
+        "The ABIS layer is split into dedicated face, fingerprint and iris microservices. Each one converts raw captures into standardized ISO/IEC 19794 templates and checks image quality before a record is accepted, so only usable biometrics reach identification and verification.",
+      ],
+      bullets: [
+        "Delivered the Agent Portal and the Service Provider Portal to User Acceptance Testing (UAT) and integration with external systems.",
+        "Built ABIS template-generation microservices for face, fingerprint and iris using Java 21, Spring Boot and a biometric SDK, with batch processing and quality thresholds.",
+        "Built Spring Boot enrollment middleware that relays enrollment requests over Kafka with end-to-end trace propagation.",
+        "Developed React / Next.js portals with authentication and multi-language support.",
+        "Built consent management features: consent agreements with purposes, attributes and retention, user-assisted consent tracking, and data policies.",
+        "Streamlined platform deployments from over 1 hour to a single command.",
+        "Integrated SonarQube checks with automated error notifications.",
+        "Coordinated integrations with 4 external technical partners.",
+        "Led technical planning, estimation and code reviews for the development team.",
+      ],
+    },
+  },
+  {
     id: "datatocare",
     companyName: "Savics SRL",
     type: "Professional",
     category: ["Backend", "Frontend", "UI/UX"],
     shortDescription:
-      "DataToCare is a fully customizable open-source suite of integrated applications (mobile, desktop, web) that connects national laboratory networks by collecting diagnostic and patient data at the facility level, displaying real-time information on a dashboard to facilitate decision-making at the central level, and notifying test results to medical teams and patients.",
+      "Connects national laboratory networks: collects test data, shows live dashboards and notifies results.",
     websiteLink: "https://datatocare.org",
     techStack: ["Angular", "Javascript", "HTML 5", "CSS 3", "Java", "Javafx", "Kotlin"],
     startDate: new Date("2019-12-01"),
     endDate: new Date("2022-07-01"),
-    companyLogoImg: "/experience/datatocare/logo.png",
+    companyLogoImg: "/experience/datatocare/cover.svg",
     pagesInfoArr: [
       {
         title: "Data to Care screen shoots",
         description: "Some of the screenshoot that show Web part",
         imgArr: [
-          "/experience/datatocare/card_1.png",
-          "/experience/datatocare/card_2.png",
-          "/experience/datatocare/card_3.png",
-          "/experience/datatocare/card_4.png",
+          "/experience/datatocare/logo.webp",
+          "/experience/datatocare/card_1.webp",
+          "/experience/datatocare/card_2.webp",
+          "/experience/datatocare/card_3.webp",
+          "/experience/datatocare/card_4.webp",
         ],
       }
     ],
@@ -71,7 +141,7 @@ export const Experiences: ExperienceInterface[] = [
     type: "Professional",
     category: ["Backend", "Frontend", "UI/UX"],
     shortDescription:
-      "Connecting experts to impactful opportunities in gender equality, sustainable development, and more. Empowering professionals to expand their reach and drive progress.",
+      "ExpertConnect matches professionals with high-impact opportunities in gender equality and sustainable development.",
     websiteLink: "https://rci.uat.techclick.rw",
     techStack: [
       "Next.js",
@@ -85,22 +155,23 @@ export const Experiences: ExperienceInterface[] = [
     ],
     startDate: new Date("2025-02-01"),
     endDate: new Date("2025-07-31"),
-    companyLogoImg: "/experience/rci/logo.png",
+    companyLogoImg: "/experience/rci/cover.svg",
     pagesInfoArr: [
       {
         title: "Landing Page",
         description:
           "Modern and responsive landing page showcasing different pages and features",
         imgArr: [
-          "/experience/rci/landing_1.png",
-          "/experience/rci/landing_3.png",
-          "/experience/rci/landing_5.png",
-          "/experience/rci/landing_6.png",
-          "/experience/rci/landing_2.png",
-          "/experience/rci/landing_4.png",
-          "/experience/rci/cli_dashboard_1.png",
-          "/experience/rci/cli_dashboard_2.png",
-          "/experience/rci/cli_dashboard_3.png",
+          "/experience/rci/logo.webp",
+          "/experience/rci/landing_1.webp",
+          "/experience/rci/landing_3.webp",
+          "/experience/rci/landing_5.webp",
+          "/experience/rci/landing_6.webp",
+          "/experience/rci/landing_2.webp",
+          "/experience/rci/landing_4.webp",
+          "/experience/rci/cli_dashboard_1.webp",
+          "/experience/rci/cli_dashboard_2.webp",
+          "/experience/rci/cli_dashboard_3.webp",
         ],
       },
     ],
@@ -122,24 +193,25 @@ export const Experiences: ExperienceInterface[] = [
     type: "Professional",
     category: ["Backend", "Frontend", "UI/UX"],
     shortDescription:
-      "HR Management System for Casual worker Management, Attendance, Payroll, and more.",
+      "HR system for casual workers, covering attendance tracking, payroll processing and workforce records.",
     websiteLink: "https://adminpanel.fixarwanda.com",
     techStack: ["React", "Node.js", "MYSQL", "Typescript", "Tailwind CSS"],
     startDate: new Date("2021-08-01"),
     endDate: new Date("2024-10-01"),
-    companyLogoImg: "/experience/fixa/logo.png",
+    companyLogoImg: "/experience/fixa/cover.svg",
     pagesInfoArr: [
       {
         title: "Admin Panel Screenshots",
         description: "Fixa Admin Panel is a comprehensive HR management system designed to streamline casual worker management, attendance tracking, payroll processing, and more.",
         imgArr: [
-          "/experience/fixa/app_1.png",
-          "/experience/fixa/app_2.png",
-          "/experience/fixa/app_3.png",
-          "/experience/fixa/app_4.png",
-          "/experience/fixa/app_5.png",
-          "/experience/fixa/app_6.png",
-          "/experience/fixa/app_7.png",
+          "/experience/fixa/logo.webp",
+          "/experience/fixa/app_1.webp",
+          "/experience/fixa/app_2.webp",
+          "/experience/fixa/app_3.webp",
+          "/experience/fixa/app_4.webp",
+          "/experience/fixa/app_5.webp",
+          "/experience/fixa/app_6.webp",
+          "/experience/fixa/app_7.webp",
         ],
       }
     ],
@@ -164,27 +236,28 @@ export const Experiences: ExperienceInterface[] = [
     type: "Professional",
     category: ["Web Dev", "UI/UX"],
     shortDescription:
-      "EarthLink Business is your strategic partner in international business expansion. We provide comprehensive solutions to help companies overcome cross-border challenges, navigate complex markets, and unlock global growth opportunities.",
+      "Company website for EarthLink Business, a firm that helps companies expand into international markets.",
     websiteLink:
       "https://earthlinkgroup.com",
     techStack: ["Next.js", "Typescript", "Tailwind CSS"],
     startDate: new Date("2025-05-01"),
     endDate: new Date("2025-07-15"),
-    companyLogoImg: "/experience/earthlinkgroup/logo.png",
+    companyLogoImg: "/experience/earthlinkgroup/cover.svg",
     pagesInfoArr: [
       {
         title: "Different Pages",
         description:
           "Modern and responsive landing page showcasing different pages and features",
         imgArr: [
-          "/experience/earthlinkgroup/app_1.png",
-          "/experience/earthlinkgroup/app_2.png",
-          "/experience/earthlinkgroup/app_3.png",
-          "/experience/earthlinkgroup/app_4.png",
-          "/experience/earthlinkgroup/app_5.png",
-          "/experience/earthlinkgroup/app_6.png",
-          "/experience/earthlinkgroup/app_7.png",
-          "/experience/earthlinkgroup/app_8.png",
+          "/experience/earthlinkgroup/logo.webp",
+          "/experience/earthlinkgroup/app_1.webp",
+          "/experience/earthlinkgroup/app_2.webp",
+          "/experience/earthlinkgroup/app_3.webp",
+          "/experience/earthlinkgroup/app_4.webp",
+          "/experience/earthlinkgroup/app_5.webp",
+          "/experience/earthlinkgroup/app_6.webp",
+          "/experience/earthlinkgroup/app_7.webp",
+          "/experience/earthlinkgroup/app_8.webp",
         ],
       },
     ],
@@ -207,24 +280,25 @@ export const Experiences: ExperienceInterface[] = [
     type: "Professional",
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
-      "Build Work Experience through Skills Challenges Platform",
+      "Platform where people build real work experience by completing skills challenges and showcasing results.",
     websiteLink: "https://skillschallenges.umurava.africa",
     techStack: ["Next.js", "React", "Node.js", "MongoDB", "Typescript"],
     startDate: new Date("2025-04-01"),
     endDate: new Date("2025-05-31"),
-    companyLogoImg: "/experience/umurava/logo.png",
+    companyLogoImg: "/experience/umurava/cover.svg",
     pagesInfoArr: [
       {
         title: "Umurava challenge platform",
         description:
           "Modern and responsive challenge platform showcasing different pages and features",
         imgArr: [
-          "/experience/umurava/blog_1.png",
-          "/experience/umurava/blog_2.png",
-          "/experience/umurava/blog_3.png",
-          "/experience/umurava/blog_4.png",
-          "/experience/umurava/blog_5.png",
-          "/experience/umurava/blog_6.png",
+          "/experience/umurava/logo.webp",
+          "/experience/umurava/blog_1.webp",
+          "/experience/umurava/blog_2.webp",
+          "/experience/umurava/blog_3.webp",
+          "/experience/umurava/blog_4.webp",
+          "/experience/umurava/blog_5.webp",
+          "/experience/umurava/blog_6.webp",
         ],
       }
     ],
@@ -248,21 +322,22 @@ export const Experiences: ExperienceInterface[] = [
     type: "Personal Project",
     category: ["Full Stack", "UI/UX"],
     shortDescription:
-      "HR Management System for application tracking, employee management, and more.",
+      "Recruitment platform where applicants submit profiles and the Alight HR team reviews and selects candidates.",
     githubLink: "https://github.com/lcdamy/frontend_alight_challenge",
     techStack: ["Next.js", "React", "Node.js", "Typescript", "MYSQL"],
     startDate: new Date("2025-07-01"),
     endDate: new Date("2022-07-31"),
-    companyLogoImg: "/experience/alight/logo.png",
+    companyLogoImg: "/experience/alight/cover.svg",
     pagesInfoArr: [
       {
         title: "Alight HR Management System",
         description: "A comprehensive HR management system for application tracking, employee management, and more.",
         imgArr: [
-          "/experience/alight/app_1.png",
-          "/experience/alight/app_2.png",
-          "/experience/alight/app_3.png",
-          "/experience/alight/app_4.png"
+          "/experience/alight/logo.webp",
+          "/experience/alight/app_1.webp",
+          "/experience/alight/app_2.webp",
+          "/experience/alight/app_3.webp",
+          "/experience/alight/app_4.webp"
         ],
       }
     ],
@@ -285,20 +360,21 @@ export const Experiences: ExperienceInterface[] = [
     type: "Personal Project",
     category: ["Web Dev", "Frontend", "UI/UX"],
     shortDescription:
-      "Shortened URL service with user authentication, link management, and analytics.",
+      "URL shortener with Google sign-in, where users create short links, manage them and track click analytics.",
     websiteLink: "https://qt-challenge-frontend.vercel.app",
     githubLink: "https://github.com/lcdamy/qt_challenge_frontend",
     techStack: ["React", "Tailwind CSS", "Google Auth"],
     startDate: new Date("2025-02-01"),
     endDate: new Date("2025-02-15"),
-    companyLogoImg: "/experience/qt/logo.png",
+    companyLogoImg: "/experience/qt/cover.svg",
     pagesInfoArr: [
       {
         title: "Shortened URL Service",
         description:
           "A modern and responsive shortened URL service with user authentication, link management, and analytics.",
         imgArr: [
-          "/experience/qt/app_1.png"
+          "/experience/qt/logo.webp",
+          "/experience/qt/app_1.webp"
         ],
       },
 
@@ -324,20 +400,21 @@ export const Experiences: ExperienceInterface[] = [
     type: "Personal Project",
     category: ["Web Dev", "UI/UX"],
     shortDescription:
-      "Developed a user-friendly waste products for recycling",
+      "Redesigned website for REM Waste that explains different waste products and how each type is recycled.",
     websiteLink: "https://remwaste-challenge.netlify.app",
     githubLink: "https://github.com/lcdamy/REMWASTE-CHALLENGE",
     techStack: ["HTML 5", "CSS 3", "React", "Tailwind CSS"],
     startDate: new Date("2025-05-01"),
     endDate: new Date("2025-06-15"),
-    companyLogoImg: "/experience/remwaste/logo.png",
+    companyLogoImg: "/experience/remwaste/cover.svg",
     pagesInfoArr: [
       {
         title: "Rem Waste new refined website",
         description: "Developed a user-friendly waste products for recycling website that allows users to easily navigate and find information about different types of waste products and their recycling processes.",
         imgArr: [
-          "/experience/remwaste/app_1.png",
-          "/experience/remwaste/app_2.png",
+          "/experience/remwaste/logo.webp",
+          "/experience/remwaste/app_1.webp",
+          "/experience/remwaste/app_2.webp",
         ],
       },
     ],
@@ -362,20 +439,21 @@ export const Experiences: ExperienceInterface[] = [
     type: "Personal Project",
     category: ["Web Dev", "UI/UX"],
     shortDescription:
-      "Know Your Strengths, Unlock New Opportunities",
+      "Web app where users submit data about their skills and get instant AI-generated feedback on their strengths.",
     websiteLink: "https://smart-skill-profiler.netlify.app",
     githubLink: "https://github.com/lcdamy/Smart-Skill-Profiler-Challenge",
     techStack: ["React", "Tailwind CSS", "Typescript"],
     startDate: new Date("2025-07-01"),
     endDate: new Date("2025-07-15"),
-    companyLogoImg: "/experience/smart/logo.png",
+    companyLogoImg: "/experience/smart/cover.svg",
     pagesInfoArr: [
       {
         title: "Smart Skill Profiler",
         description: "Submit your structured data and receive intelligent, instant feedback generated by advanced AI models. From form to feedback, instantly harness AI to turn your data into action",
         imgArr: [
-          "/experience/smart/app_1.png",
-          "/experience/smart/app_2.png",
+          "/experience/smart/logo.webp",
+          "/experience/smart/app_1.webp",
+          "/experience/smart/app_2.webp",
         ],
       },
     ],
@@ -400,20 +478,21 @@ export const Experiences: ExperienceInterface[] = [
     type: "Personal Project",
     category: ["Web Dev", "UI/UX"],
     shortDescription:
-      "A platform for job seekers to find and apply for jobs that match their skills and interests.",
+      "Job board that helps job seekers find and apply for jobs matching their skills and interests.",
     websiteLink: "https://frontend-job-board-system.netlify.app",
     githubLink: "https://github.com/lcdamy/frontend_Job_Board_System",
     techStack: ["React", "Tailwind CSS", "Typescript"],
     startDate: new Date("2025-08-01"),
     endDate: new Date("2025-08-15"),
-    companyLogoImg: "/experience/isco/logo.png",
+    companyLogoImg: "/experience/isco/cover.svg",
     pagesInfoArr: [
       {
         title: "isco Job Board",
         description: "A platform for job seekers to find and apply for jobs that match their skills and interests.",
         imgArr: [
-          "/experience/isco/app_1.png",
-          "/experience/isco/app_2.png",
+          "/experience/isco/logo.webp",
+          "/experience/isco/app_1.webp",
+          "/experience/isco/app_2.webp",
         ],
       },
     ],
@@ -438,22 +517,23 @@ export const Experiences: ExperienceInterface[] = [
     type: "Professional",
     category: ["Frontend", "UI/UX"],
     shortDescription:
-      "Connect with local and international investors ready to fund Rwanda's most promising innovations",
+      "Platform that connects local and international investors with Rwanda's most promising innovations.",
     websiteLink: "https://innovate.uat2.techclick.rw/en",
     techStack: ["React", "Tailwind CSS", "Typescript"],
     startDate: new Date("2025-01-01"),
     endDate: new Date("2025-09-01"),
-    companyLogoImg: "/experience/innovate/logo.png",
+    companyLogoImg: "/experience/innovate/cover.svg",
     pagesInfoArr: [
       {
         title: "Innovate Platform",
         description: "Screenshots showcasing the Innovate platform's web interface.",
         imgArr: [
-          "/experience/innovate/app_1.png",
-          "/experience/innovate/app_2.png",
-          "/experience/innovate/app_3.png",
-          "/experience/innovate/app_4.png",
-          "/experience/innovate/app_5.png",
+          "/experience/innovate/logo.webp",
+          "/experience/innovate/app_1.webp",
+          "/experience/innovate/app_2.webp",
+          "/experience/innovate/app_3.webp",
+          "/experience/innovate/app_4.webp",
+          "/experience/innovate/app_5.webp",
         ],
       }
     ],

@@ -3,7 +3,7 @@ export const siteConfig = {
   authorName: "lcdamy",
   username: "lcdamy",
   description:
-    "lcdamy's portfolio - A software engineer with 10 years of experience in web development, specializing in building scalable and efficient applications. Passionate about coding, problem-solving, and continuous learning.",
+    "lcdamy's portfolio - A software engineer and technical lead with 10+ years of experience delivering digital solutions across digital identity, fintech, logistics and public health.",
   url: "https://lcdamy.netlify.app",
   links: {
     twitter: "https://x.com/lcdamy",

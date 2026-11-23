@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { Icons } from "@/components/common/icons";
 import ExperienceDescription from "@/components/experience/exp-description";
@@ -18,12 +19,32 @@ interface ExperiencePageProps {
   };
 }
 
-const githubUsername = "lcdamy";
+export function generateStaticParams() {
+  return Experiences.map((exp) => ({ expId: exp.id }));
+}
+
+export function generateMetadata({ params }: ExperiencePageProps): Metadata {
+  const exp = Experiences.find((val) => val.id === params.expId);
+  if (!exp) return {};
+
+  return {
+    title: exp.companyName,
+    description: exp.shortDescription,
+    alternates: {
+      canonical: `${siteConfig.url}/experience/${exp.id}`,
+    },
+    openGraph: {
+      title: exp.companyName,
+      description: exp.shortDescription,
+      url: `${siteConfig.url}/experience/${exp.id}`,
+    },
+  };
+}
 
 export default function Experience({ params }: ExperiencePageProps) {
-  let exp = Experiences.find((val) => val.id === params.expId);
+  const exp = Experiences.find((val) => val.id === params.expId);
   if (!exp) {
-    redirect("/experience");
+    notFound();
   }
 
   return (
@@ -40,7 +61,7 @@ export default function Experience({ params }: ExperiencePageProps) {
       </Link>
       <div>
         <time
-          dateTime={Date.now().toString()}
+          dateTime={new Date(exp.startDate).toISOString()}
           className="block text-sm text-muted-foreground"
         >
           {formatDateFromObj(exp.startDate)}
@@ -72,7 +93,7 @@ export default function Experience({ params }: ExperiencePageProps) {
           >
             <Image
               src={peterImg}
-              alt={"lc"}
+              alt="Pierre Damien Murindangabo Cyuzuzo"
               width={42}
               height={42}
               className="rounded-full bg-background"
@@ -97,6 +118,29 @@ export default function Experience({ params }: ExperiencePageProps) {
         priority
       />
 
+      {exp.links && exp.links.length > 0 && (
+        <div className="mb-7 ">
+          <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-2">
+            Live Systems
+          </h2>
+          <ul className="space-y-2">
+            {exp.links.map((link) => (
+              <li key={link.url}>
+                <Link
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-primary underline-offset-4 hover:underline"
+                >
+                  <Icons.externalLink className="mr-2 h-4 w-4" />
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="mb-7 ">
         <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-2">
           Tech Stack
@@ -115,32 +159,33 @@ export default function Experience({ params }: ExperiencePageProps) {
         />
       </div>
 
-      <div className="mb-7 ">
-        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
-          Page Info
-        </h2>
-        {exp.pagesInfoArr.map((page, ind) => (
-          <div key={ind}>
-            <h3 className="flex items-center font-heading text-xl leading-tight lg:text-xl mt-3">
-              <Icons.star className="h-5 w-5 mr-2" /> {page.title}
-            </h3>
-            <div>
-              <p>{page.description}</p>
-              {page.imgArr.map((img, ind) => (
-                <Image
-                  src={img}
-                  key={ind}
-                  alt={img}
-                  width={720}
-                  height={405}
-                  className="my-4 rounded-md border bg-muted transition-colors"
-                  priority
-                />
-              ))}
+      {exp.pagesInfoArr.length > 0 && (
+        <div className="mb-7 ">
+          <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
+            Page Info
+          </h2>
+          {exp.pagesInfoArr.map((page, ind) => (
+            <div key={ind}>
+              <h3 className="flex items-center font-heading text-xl leading-tight lg:text-xl mt-3">
+                <Icons.star className="h-5 w-5 mr-2" /> {page.title}
+              </h3>
+              <div>
+                <p>{page.description}</p>
+                {page.imgArr.map((img, ind) => (
+                  <Image
+                    src={img}
+                    key={ind}
+                    alt={`${exp.companyName} - ${page.title} screenshot ${ind + 1}`}
+                    width={720}
+                    height={405}
+                    className="my-4 rounded-md border bg-muted transition-colors"
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">
