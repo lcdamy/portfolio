@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 interface MobileNavProps {
   items: any[];
   children?: React.ReactNode;
+  onClose: () => void;
 }
 
 const norican = Norican({
@@ -18,17 +19,31 @@ const norican = Norican({
   display: "swap",
 });
 
-export function MobileNav({ items, children }: MobileNavProps) {
+export function MobileNav({ items, children, onClose }: MobileNavProps) {
   useLockBody();
 
+  // Close with the Escape key.
+  React.useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
   return (
+    // Tapping the backdrop (outside the panel) closes the menu.
     <div
+      onClick={onClose}
       className={cn(
         "fixed inset-0 top-12 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-top-10 md:hidden"
       )}
     >
-      <div className="relative z-20 grid gap-6 rounded-md bg-popover p-4 text-popover-foreground shadow-md">
-        <Link href="/" className="flex items-center space-x-2">
+      <div
+        className="relative z-20 grid gap-6 rounded-md bg-popover p-4 text-popover-foreground shadow-md"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Link href="/" className="flex items-center space-x-2" onClick={onClose}>
           <span className={cn(norican.className, "text-2xl")}>
             {siteConfig.authorName}
           </span>
@@ -38,6 +53,7 @@ export function MobileNav({ items, children }: MobileNavProps) {
             <Link
               key={index}
               href={item.disabled ? "#" : item.href}
+              onClick={onClose}
               className={cn(
                 "flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline",
                 item.disabled && "cursor-not-allowed opacity-60"

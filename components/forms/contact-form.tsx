@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 import { useModalStore } from "@/hooks/use-modal-store";
 
 const formSchema = z.object({
@@ -55,20 +56,30 @@ export function ContactForm() {
         body: JSON.stringify(values),
       });
 
-      form.reset();
-
-      if (response.status === 200) {
-        storeModal.onOpen({
-          title: "Thankyou!",
-          description:
-            "Your message has been received! I appreciate your contact and will get back to you shortly.",
-          icon: Icons.successAnimated,
-        });
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
       }
+
+      // Only clear the form once the message has really been sent.
+      form.reset();
+      storeModal.onOpen({
+        title: "Thank you!",
+        description:
+          "Your message has been received! I appreciate your contact and will get back to you shortly.",
+        icon: Icons.successAnimated,
+      });
     } catch (err) {
-      console.log("Err!", err);
+      console.error("Contact form submission failed", err);
+      toast({
+        variant: "destructive",
+        title: "Your message wasn't sent",
+        description:
+          "Something went wrong. Please try again in a moment, or reach me on LinkedIn.",
+      });
     }
   }
+
+  const isSubmitting = form.formState.isSubmitting;
 
   return (
     <Form {...form}>
@@ -134,7 +145,10 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+          {isSubmitting && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+          {isSubmitting ? "Sending..." : "Submit"}
+        </Button>
       </form>
     </Form>
   );

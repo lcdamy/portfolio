@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import { Icons } from "@/components/common/icons";
 import ChipContainer from "@/components/ui/chip-container";
@@ -73,15 +73,27 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         >
           <motion.div
             className={`
-              p-3 sm:p-5 rounded-lg border border-border bg-card hover:shadow-lg 
-              transition-all duration-300 cursor-pointer
+              p-3 sm:p-5 rounded-lg border border-border bg-card hover:shadow-lg
+              transition-shadow duration-300
               ${isExpanded ? "shadow-md" : ""}
             `}
-            onClick={() => toggleExpand(experience.id)}
-            whileHover={{ y: -2 }}
             layout
           >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+            {/* Only the header toggles the card, so clicks inside the
+                expanded content (text, chips, links) never collapse it. */}
+            <div
+              role="button"
+              tabIndex={0}
+              aria-expanded={isExpanded}
+              onClick={() => toggleExpand(experience.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  toggleExpand(experience.id);
+                }
+              }}
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 cursor-pointer select-none rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
               <div>
                 <h3 className="text-lg sm:text-xl font-bold">
                   {experience.position}
@@ -189,24 +201,26 @@ interface TimelineProps {
 }
 
 const Timeline: React.FC<TimelineProps> = ({ experiences }) => {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-
   // Sort experiences by date (most recent first)
-  const sortedExperiences = [...experiences].sort((a, b) => {
-    const dateA = a.endDate === "Present" ? new Date() : a.endDate;
-    const dateB = b.endDate === "Present" ? new Date() : b.endDate;
-    return dateB.getTime() - dateA.getTime();
-  });
+  const sortedExperiences = useMemo(
+    () =>
+      [...experiences].sort((a, b) => {
+        const dateA = a.endDate === "Present" ? new Date() : a.endDate;
+        const dateB = b.endDate === "Present" ? new Date() : b.endDate;
+        return dateB.getTime() - dateA.getTime();
+      }),
+    [experiences]
+  );
 
-  // Auto-expand the first item on initial load
-  useEffect(() => {
-    if (sortedExperiences.length > 0 && expandedId === null) {
-      setExpandedId(sortedExperiences[0].id);
-    }
-  }, [sortedExperiences, expandedId]);
+  // The most recent role starts expanded. This is only the initial value:
+  // previously an effect re-opened it every time all cards were closed,
+  // which made collapsing a card look like the click did nothing.
+  const [expandedId, setExpandedId] = useState<string | null>(
+    () => sortedExperiences[0]?.id ?? null
+  );
 
   const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
+    setExpandedId((current) => (current === id ? null : id));
   };
 
   return (

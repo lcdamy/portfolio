@@ -32,12 +32,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className="flex gap-2 flex-wrap">
           <ChipContainer textArr={project.category} />
         </div>
-        <Link href={`/experience/${project.id}`}>
-          <Button variant={"default"} className="mt-2">
+        <Button asChild variant={"default"} className="mt-2">
+          <Link href={`/experience/${project.id}`}>
             Read more
             <Icons.chevronRight className="w-4 ml-1" />
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
       <div className="absolute bottom-4 right-4 p-3 rounded-full bg-background border border-border">
         {project.type === "Personal Project" ? (

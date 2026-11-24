@@ -32,6 +32,8 @@ export function MainNav({ items, children }: MainNavProps) {
     setShowMobileMenu(false);
   }, [pathname]);
 
+  const closeMobileMenu = React.useCallback(() => setShowMobileMenu(false), []);
+
   return (
     <div className="flex gap-6 md:gap-10">
       <div className="motion-safe:animate-fade-down">
@@ -46,7 +48,7 @@ export function MainNav({ items, children }: MainNavProps) {
           {items?.map((item, index) => (
             <div
               key={index}
-              className="motion-safe:animate-fade-down transition-transform hover:scale-105 active:scale-95"
+              className="motion-safe:animate-fade-down"
               style={{ animationDelay: `${0.1 * index}s` }}
             >
               <Link
@@ -66,14 +68,17 @@ export function MainNav({ items, children }: MainNavProps) {
         </nav>
       ) : null}
       <button
-        className="flex items-center space-x-2 md:hidden transition-transform hover:scale-105 active:scale-95"
-        onClick={() => setShowMobileMenu(!showMobileMenu)}
+        className="flex items-center space-x-2 md:hidden"
+        onClick={() => setShowMobileMenu((open) => !open)}
+        aria-expanded={showMobileMenu}
       >
         {showMobileMenu ? <Icons.close /> : <Icons.menu />}
         <span className="font-bold">Menu</span>
       </button>
       {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
+        <MobileNav items={items} onClose={closeMobileMenu}>
+          {children}
+        </MobileNav>
       )}
     </div>
   );
