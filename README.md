@@ -21,7 +21,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | --- | --- |
 | `NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID` | Google Analytics ID (optional — analytics is skipped when unset) |
 | `GOOGLE_FORM_LINK` | Base URL of the Google Form that receives contact submissions |
-| `GOOGLE_FORM_FIELD_ID_NAME` / `_EMAIL` / `_MESSAGE` / `_SOCIAL` | `entry.XXXX` field IDs of that form |
+| `GOOGLE_FORM_FIELD_ID_NAME` / `_EMAIL` / `_MESSAGE` | `entry.XXXX` field IDs of that form |
 | `NEXT_PUBLIC_RESUME_LINK` | Where `/resume` redirects |
 | `NEXT_PUBLIC_GOOGLE_VERIFICATION` | Optional Google Search Console verification token |
 

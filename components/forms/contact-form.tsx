@@ -27,7 +27,6 @@ const formSchema = z.object({
   message: z.string().min(10, {
     message: "Please write something more descriptive.",
   }),
-  social: z.string().url().optional().or(z.literal("")),
 });
 
 export function ContactForm() {
@@ -41,7 +40,6 @@ export function ContactForm() {
       name: "",
       email: "",
       message: "",
-      social: "",
     },
   });
 
@@ -127,22 +125,6 @@ export function ContactForm() {
               <FormControl>
                 <Textarea placeholder="Enter your message" {...field} />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="social"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Social (optional)</FormLabel>
-              <FormControl>
-                <Input placeholder="Link for social account" {...field} />
-              </FormControl>
-              {/* <FormDescription>
-                                This is your public display name.
-                            </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}

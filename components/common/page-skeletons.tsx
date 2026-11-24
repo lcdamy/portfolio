@@ -167,7 +167,7 @@ export function CareerSkeleton() {
 }
 
 export function ContactSkeleton() {
-  const fields = ["h-10", "h-10", "h-20", "h-10"];
+  const fields = ["h-10", "h-10", "h-20"];
   return (
     <PageShellSkeleton>
       <div className="flex flex-col lg:flex-row">
