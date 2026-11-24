@@ -2,11 +2,12 @@
 
 import { Norican } from "next/font/google";
 import Link from "next/link";
-import { usePathname, useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 
 import { Icons } from "@/components/common/icons";
 import { MobileNav } from "@/components/common/mobile-nav";
+import { usePendingPath } from "@/components/common/navigation-progress";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -24,9 +25,13 @@ const norican = Norican({
 
 
 export function MainNav({ items, children }: MainNavProps) {
-  const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
   const pathname = usePathname();
+  // Highlight the clicked item right away, before the new page has loaded.
+  const pendingPath = usePendingPath();
+  const activePath = pendingPath ?? pathname;
+  const isActive = (href: string) =>
+    activePath === href || activePath.startsWith(`${href}/`);
 
   React.useEffect(() => {
     setShowMobileMenu(false);
@@ -53,9 +58,10 @@ export function MainNav({ items, children }: MainNavProps) {
             >
               <Link
                 href={item.disabled ? "#" : item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
                   "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                  item.href.startsWith(`/${segment}`)
+                  isActive(item.href)
                     ? "text-foreground"
                     : "text-foreground/60",
                   item.disabled && "cursor-not-allowed opacity-80"

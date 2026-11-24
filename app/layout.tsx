@@ -5,6 +5,8 @@ import { Inter as FontSans } from "next/font/google";
 import localFont from "next/font/local";
 
 import { AutoTheme } from "@/components/common/auto-theme";
+import { DevRouteWarmup } from "@/components/common/dev-route-warmup";
+import { NavigationProgress } from "@/components/common/navigation-progress";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/config/site";
@@ -127,7 +129,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           ]}
         >
           <AutoTheme />
-          {children}
+          <DevRouteWarmup />
+          <NavigationProgress>{children}</NavigationProgress>
           <Toaster />
           <ModalProvider />
         </ThemeProvider>
