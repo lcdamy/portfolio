@@ -3,6 +3,16 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // The service worker must never be cached long, so updates reach
+        // visitors on their next visit.
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
+          { key: "Service-Worker-Allowed", value: "/" },
+        ],
+      },
+      {
         source: "/api/sb-contact",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },

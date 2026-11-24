@@ -70,11 +70,13 @@ export function ContactForm() {
       });
     } catch (err) {
       console.error("Contact form submission failed", err);
+      const offline = typeof navigator !== "undefined" && !navigator.onLine;
       toast({
         variant: "destructive",
         title: "Your message wasn't sent",
-        description:
-          "Something went wrong. Please try again in a moment, or reach me on LinkedIn.",
+        description: offline
+          ? "You're offline. Your message is still here; send it again once you're back online."
+          : "Something went wrong. Please try again in a moment, or reach me on LinkedIn.",
       });
     }
   }

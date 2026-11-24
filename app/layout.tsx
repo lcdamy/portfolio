@@ -7,6 +7,7 @@ import localFont from "next/font/local";
 import { AutoTheme } from "@/components/common/auto-theme";
 import { DevRouteWarmup } from "@/components/common/dev-route-warmup";
 import { NavigationProgress } from "@/components/common/navigation-progress";
+import { OfflineSupport } from "@/components/common/offline-support";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/config/site";
@@ -130,6 +131,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <AutoTheme />
           <DevRouteWarmup />
+          <OfflineSupport />
           <NavigationProgress>{children}</NavigationProgress>
           <Toaster />
           <ModalProvider />
