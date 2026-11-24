@@ -37,7 +37,11 @@ export default function IndexPage() {
     url: siteConfig.url,
     image: siteConfig.ogImage,
     jobTitle: "Full Stack Developer",
-    sameAs: [siteConfig.links.github, siteConfig.links.twitter],
+    sameAs: [
+      siteConfig.links.github,
+      siteConfig.links.linkedin,
+      siteConfig.links.twitter,
+    ],
   };
 
 
@@ -92,6 +96,22 @@ export default function IndexPage() {
               </Link>
             </AnimatedText>
             <AnimatedText delay={0.3}>
+              <Link
+                href={siteConfig.links.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({
+                    variant: "outline",
+                    size: "lg",
+                  })
+                )}
+                aria-label="View Pierre Damien's LinkedIn profile"
+              >
+                <Icons.linkedin className="w-4 h-4 mr-2" /> LinkedIn
+              </Link>
+            </AnimatedText>
+            <AnimatedText delay={0.4}>
               <Link
                 href={"/contact"}
                 rel="noreferrer"

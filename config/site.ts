@@ -8,6 +8,8 @@ export const siteConfig = {
   links: {
     twitter: "https://x.com/lcdamy",
     github: "https://github.com/lcdamy",
+    linkedin:
+      "https://www.linkedin.com/in/pierre-damien-murindangabo-cyuzuzo-709b53151",
   },
   ogImage: "https://lcdamy.netlify.app/peter-img.jpg",
   iconIco: "/icon.svg",
