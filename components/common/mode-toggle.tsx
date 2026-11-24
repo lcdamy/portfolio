@@ -11,9 +11,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { setAutoThemeEnabled, themeForTime } from "@/lib/auto-theme";
 
 export function ModeToggle() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme: applyTheme } = useTheme();
+
+  // Picking a theme by hand turns off the automatic day/night switch.
+  const setTheme = (theme: string) => {
+    setAutoThemeEnabled(false);
+    applyTheme(theme);
+  };
+
+  const setAutoTheme = () => {
+    setAutoThemeEnabled(true);
+    applyTheme(themeForTime());
+  };
 
   return (
     <DropdownMenu>
@@ -60,9 +72,9 @@ export function ModeToggle() {
           <span>Synthwave</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={setAutoTheme}>
           <Icons.laptop className="mr-2 h-4 w-4" />
-          <span>System</span>
+          <span>Auto (day/night)</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

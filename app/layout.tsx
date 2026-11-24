@@ -4,9 +4,11 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter as FontSans } from "next/font/google";
 import localFont from "next/font/local";
 
+import { AutoTheme } from "@/components/common/auto-theme";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/config/site";
+import { autoThemeScript } from "@/lib/auto-theme";
 import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/providers/modal-provider";
 
@@ -99,7 +101,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        {/* Picks light or dark from the visitor's local time before paint. */}
+        <script dangerouslySetInnerHTML={{ __html: autoThemeScript }} />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -109,8 +114,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           themes={[
             "light",
             "dark",
@@ -121,6 +126,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             "synthwave",
           ]}
         >
+          <AutoTheme />
           {children}
           <Toaster />
           <ModalProvider />
